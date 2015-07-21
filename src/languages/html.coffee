@@ -39,6 +39,7 @@ TAGS = {
   i: {category: 'content'}
   b: {category: 'content'}
   u: {category: 'content'}
+  center: {category: 'content'}
   sub: {category: 'content'}
   sup: {category: 'content'}
   br: {category: 'content'}
