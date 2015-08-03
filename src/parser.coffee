@@ -29,27 +29,6 @@ exports.ParserFactory = class ParserFactory
 # and a given parser function.
 exports.Parser = class Parser
   constructor: (@text, @opts = {}) ->
-    convertFunction = (x) ->
-      if (typeof x is 'string') or x instanceof String
-        return {text: x, display: x}
-      else
-        return x
-    for key, val of @opts.functions
-      for index, options of val.dropdown then do (options) =>
-        dropdownOnly = false
-        if options.dropdownOnly?
-          dropdownOnly = options.dropdownOnly
-          options = options.options
-
-        @opts.functions[key].dropdown[index] = {
-          dropdownOnly: dropdownOnly
-          options: options
-          generate: ->
-            if (typeof options is 'function')
-              return options().map convertFunction
-            else
-              return options.map convertFunction
-        }
     # Text can sometimes be subject to change
     # when doing error recovery, so keep a record of
     # the original text.
@@ -117,7 +96,8 @@ exports.Parser = class Parser
       opts.color,
       opts.socketLevel,
       opts.classes,
-      opts.parseContext
+      opts.parseContext,
+      opts.buttons
 
     @addMarkup block, opts.bounds, opts.depth
 
@@ -477,6 +457,9 @@ Parser.drop = (block, context, pred, next) ->
   else
     return helper.ENCOURAGE
 
+Parser.handleButton = (text, command, oldblock) ->
+  return text
+
 Parser.empty = ''
 Parser.emptyIndent = ''
 
@@ -527,3 +510,5 @@ exports.wrapParser = (CustomParser) ->
       return [leading, trailing]
 
     drop: (block, context, pred, next) -> CustomParser.drop block, context, pred, next
+
+    handleButton: (text, command, oldblock) -> CustomParser.handleButton text, command, oldblock
