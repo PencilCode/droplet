@@ -1087,6 +1087,7 @@ asyncTest 'Controller: Random drag undo test', ->
 
   tick 100
 
+###
 asyncTest 'Controller: ANTLR random drag reparse test', ->
   document.getElementById('test-main').innerHTML = ''
   window.editor = editor = new droplet.Editor(document.getElementById('test-main'), {
@@ -1194,3 +1195,4 @@ asyncTest 'Controller: ANTLR random drag reparse test', ->
       performTextOperation editor, op, cb
 
   tick 50
+###
