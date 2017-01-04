@@ -76,7 +76,7 @@ Contributing
 Droplet uses Grunt and npm to build. Run:
 
 ```shell
-git pull https://github.com/dabbler0/droplet.git
+git clone https://github.com/dabbler0/droplet.git
 cd droplet
 npm install
 grunt all
